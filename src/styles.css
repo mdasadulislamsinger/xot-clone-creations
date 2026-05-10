@@ -20,32 +20,35 @@
 }
 
 :root {
-  --background: oklch(0.05 0 0);
+  --background: oklch(0.04 0 0);
   --foreground: oklch(0.98 0 0);
-  --card: oklch(0.09 0 0);
+  --card: oklch(0.08 0 0);
   --card-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.65 0.27 18);
+  --muted: oklch(0.14 0 0);
+  --muted-foreground: oklch(0.62 0 0);
+  --accent: oklch(0.66 0.27 18);
   --accent-foreground: oklch(0.98 0 0);
-  --border: oklch(0.2 0 0);
-  --grid-line: oklch(0.18 0 0);
-  --status-green: oklch(0.75 0.2 145);
-  --status-blue: oklch(0.7 0.2 240);
+  --border: oklch(0.18 0 0);
+  --grid-line: oklch(0.14 0 0);
+  --status-green: oklch(0.78 0.22 145);
+  --status-blue: oklch(0.72 0.2 240);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
   html, body {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  ::selection { background: var(--accent); color: var(--accent-foreground); }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+  .font-display { font-family: var(--font-display); letter-spacing: -0.025em; }
   .font-mono { font-family: var(--font-mono); }
   .text-accent { color: var(--accent); }
   .bg-accent { background: var(--accent); }
@@ -56,26 +59,31 @@
     background-image:
       linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 8.333% 100px;
-  }
-  .noise {
-    position: relative;
+    background-size: 8.333% 120px;
   }
   .noise::after {
     content: "";
     position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
     background-size: 3px 3px;
     pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  .glow-accent {
+    box-shadow: 0 0 80px -20px color-mix(in oklab, var(--accent) 40%, transparent);
   }
 
-  .marquee {
+  .marquee-track {
     display: flex;
     gap: 4rem;
+    width: max-content;
     animation: marquee 40s linear infinite;
+    will-change: transform;
   }
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  .ease-premium { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
 }

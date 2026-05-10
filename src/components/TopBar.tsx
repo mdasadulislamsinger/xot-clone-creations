@@ -1,35 +1,43 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export function TopBar() {
   const [time, setTime] = useState("--:--:--");
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const update = () => {
-      const d = new Date();
-      setTime(d.toLocaleTimeString("en-GB", { hour12: false }));
-    };
+    const update = () => setTime(new Date().toLocaleTimeString("en-GB", { hour12: false }));
     update();
     const i = setInterval(update, 1000);
-    return () => clearInterval(i);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { clearInterval(i); window.removeEventListener("scroll", onScroll); };
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-5 flex items-center justify-between text-xs font-mono uppercase tracking-widest">
+    <motion.header
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-5 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] transition-all duration-500 ease-premium ${
+        scrolled ? "backdrop-blur-xl bg-background/60 border-b border-border/60" : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center gap-2">
         <span className="text-muted-foreground">Local/</span>
-        <span className="text-foreground">{time}</span>
+        <span className="text-foreground tabular-nums">{time}</span>
       </div>
       <div className="hidden md:flex items-center gap-1.5">
-        <span className="w-1 h-1 rounded-full bg-foreground/60" />
-        <span className="w-1 h-1 rounded-full bg-foreground/60" />
-        <span className="w-1 h-1 rounded-full bg-foreground/60" />
-        <span className="w-1 h-1 rounded-full bg-foreground/60" />
+        {[0,1,2,3].map(i => <span key={i} className="w-1 h-1 rounded-full bg-foreground/50" />)}
       </div>
       <a
         href="#contact"
-        className="rounded-full border border-foreground/40 px-5 py-2.5 hover:bg-foreground hover:text-background transition-colors"
+        className="group relative rounded-full border border-foreground/40 px-5 py-2.5 overflow-hidden ease-premium transition-colors duration-500 hover:border-foreground"
       >
-        Contact Now
+        <span className="relative z-10 transition-colors duration-500 group-hover:text-background">Contact Now</span>
+        <span className="absolute inset-0 -z-0 translate-y-full bg-foreground transition-transform duration-500 ease-premium group-hover:translate-y-0" />
       </a>
-    </header>
+    </motion.header>
   );
 }
