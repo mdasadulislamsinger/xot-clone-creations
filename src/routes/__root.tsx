@@ -48,8 +48,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "XOT STUDIO — Creative Agency & Design Studio" },
       { name: "description", content: "Creative agency and design studio crafting bold brand identities, posters, packaging and digital design worldwide." },
       { property: "og:title", content: "XOT STUDIO — Creative Agency & Design Studio" },
-      { property: "og:description", content: "Designs that you were dreaming about. Based in London, available worldwide." },
+      { property: "og:description", content: "Creative agency and design studio crafting bold brand identities, posters, packaging and digital design worldwide." },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "XOT STUDIO — Creative Agency & Design Studio" },
+      { name: "twitter:description", content: "Creative agency and design studio crafting bold brand identities, posters, packaging and digital design worldwide." },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
