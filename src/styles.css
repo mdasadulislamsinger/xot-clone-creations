@@ -14,28 +14,30 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --font-display: "Anton", "Inter", sans-serif;
+  --color-violet: var(--violet);
+  --color-gold: var(--gold);
+  --font-display: "Space Grotesk", "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
-  --background: oklch(0.04 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.08 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.14 0 0);
-  --muted-foreground: oklch(0.62 0 0);
-  --accent: oklch(0.66 0.27 18);
-  --accent-foreground: oklch(0.98 0 0);
-  --border: oklch(0.18 0 0);
-  --grid-line: oklch(0.14 0 0);
-  --status-green: oklch(0.78 0.22 145);
-  --status-blue: oklch(0.72 0.2 240);
+  --background: #0A0A0C;
+  --foreground: #F4F4F6;
+  --card: #121216;
+  --card-foreground: #F4F4F6;
+  --muted: #16161C;
+  --muted-foreground: #8A8A99;
+  --accent: #00F0FF;
+  --accent-foreground: #04121A;
+  --violet: #7000FF;
+  --gold: #FFB800;
+  --border: #1F1F2E;
+  --grid-line: #14141C;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * { border-color: var(--border); }
   html { scroll-behavior: smooth; }
   html, body {
     background: var(--background);
@@ -48,42 +50,66 @@
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); letter-spacing: -0.025em; }
+  .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
   .font-mono { font-family: var(--font-mono); }
   .text-accent { color: var(--accent); }
+  .text-violet { color: var(--violet); }
+  .text-gold { color: var(--gold); }
   .bg-accent { background: var(--accent); }
-  .text-status-green { color: var(--status-green); }
-  .text-status-blue { color: var(--status-blue); }
+  .bg-violet { background: var(--violet); }
+  .bg-gold { background: var(--gold); }
+
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .glow-teal { box-shadow: 0 0 40px -10px color-mix(in oklab, var(--accent) 60%, transparent); }
+  .glow-violet { box-shadow: 0 0 60px -15px color-mix(in oklab, var(--violet) 70%, transparent); }
+  .text-glow-teal { text-shadow: 0 0 18px color-mix(in oklab, var(--accent) 60%, transparent); }
 
   .grid-bg {
     background-image:
       linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 8.333% 120px;
+    background-size: 60px 60px;
   }
   .noise::after {
     content: "";
     position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
     background-size: 3px 3px;
     pointer-events: none;
     mix-blend-mode: overlay;
   }
-  .glow-accent {
-    box-shadow: 0 0 80px -20px color-mix(in oklab, var(--accent) 40%, transparent);
-  }
-
-  .marquee-track {
-    display: flex;
-    gap: 4rem;
-    width: max-content;
-    animation: marquee 40s linear infinite;
-    will-change: transform;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
 
   .ease-premium { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+
+  /* Vinyl grooves */
+  .vinyl-grooves {
+    background:
+      radial-gradient(circle at center, #1a1a20 0 18%, transparent 18.5%),
+      repeating-radial-gradient(circle at center, #0c0c10 0 1px, #15151b 1px 3px),
+      #0a0a0c;
+  }
+
+  @keyframes spin-vinyl { to { transform: rotate(360deg); } }
+  .spin-33 { animation: spin-vinyl 1.818s linear infinite; }
+  .spin-45 { animation: spin-vinyl 1.333s linear infinite; }
+  .spin-78 { animation: spin-vinyl 0.769s linear infinite; }
+
+  @keyframes wave-morph {
+    0%, 100% { d: path("M0,40 Q40,10 80,40 T160,40 T240,40 T320,40 T400,40"); }
+    50%      { d: path("M0,40 Q40,70 80,40 T160,40 T240,40 T320,40 T400,40"); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spin-33, .spin-45, .spin-78 { animation: none !important; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
 }
