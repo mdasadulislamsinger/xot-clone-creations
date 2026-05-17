@@ -1,8 +1,8 @@
 export function Marquee() {
-  const items = ["Branding", "Poster Design", "Packaging", "3D Visuals", "Motion", "Web Design", "Illustration", "Ad Creatives"];
+  const items = ["Vocals", "Songwriting", "Lyrics", "Composition", "Studio Recording", "Live Performance", "Nasheed", "Folk"];
   const loop = [...items, ...items];
   return (
-    <section className="relative border-b border-border py-12 md:py-16 overflow-hidden">
+    <section className="relative border-y border-border py-12 md:py-16 overflow-hidden">
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="marquee-track">
           {loop.map((t, i) => (

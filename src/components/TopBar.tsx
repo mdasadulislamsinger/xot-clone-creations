@@ -25,11 +25,12 @@ export function TopBar() {
       }`}
     >
       <div className="flex items-center gap-2">
-        <span className="text-muted-foreground">Local/</span>
-        <span className="text-foreground tabular-nums">{time}</span>
+        <span className="text-foreground tracking-[0.28em]">MD ASADUL ISLAM</span>
       </div>
-      <div className="hidden md:flex items-center gap-1.5">
-        {[0,1,2,3].map(i => <span key={i} className="w-1 h-1 rounded-full bg-foreground/50" />)}
+      <div className="hidden md:flex items-center gap-7 text-muted-foreground">
+        <a href="#discography" className="hover:text-foreground transition-colors">Discography</a>
+        <a href="#press" className="hover:text-foreground transition-colors">Press</a>
+        <span className="text-foreground tabular-nums">{time}</span>
       </div>
       <a
         href="#contact"

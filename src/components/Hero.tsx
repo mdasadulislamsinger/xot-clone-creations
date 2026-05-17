@@ -41,18 +41,26 @@ export function Hero() {
           <motion.span
             style={{ x: tx, y: ty }}
             variants={{ hidden: { y: "110%", opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 1.1, ease } } }}
-            className="block text-foreground text-[26vw] md:text-[19vw] [transform-style:preserve-3d]"
+            className="block text-foreground text-[18vw] md:text-[13vw] [transform-style:preserve-3d]"
           >
-            <span className="inline-block">XOT</span>
+            <span className="inline-block">MD ASADUL</span>
           </motion.span>
           <motion.span
             style={{ x: tx2, y: ty2 }}
             variants={{ hidden: { y: "110%", opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 1.1, ease } } }}
-            className="block text-accent text-[26vw] md:text-[19vw] -mt-[3.5vw] drop-shadow-[0_0_60px_rgba(239,30,68,0.35)]"
+            className="block text-accent text-[22vw] md:text-[16vw] -mt-[2vw] drop-shadow-[0_0_60px_rgba(239,30,68,0.35)]"
           >
-            <span className="inline-block">STUDIO</span>
+            <span className="inline-block">ISLAM</span>
           </motion.span>
         </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.5, ease }}
+          className="mt-8 font-mono text-[11px] md:text-xs uppercase tracking-[0.32em] text-muted-foreground"
+        >
+          Singer · Musical Artist · Songwriter
+        </motion.p>
       </div>
 
       <motion.div
@@ -61,9 +69,9 @@ export function Hero() {
         transition={{ duration: 0.9, delay: 0.6, ease }}
         className="relative mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 text-center font-mono text-[11px] uppercase tracking-[0.2em]"
       >
-        <InfoItem icon={<MapPin className="w-5 h-5 text-status-green" />} title="Based in United Kingdom," sub="London" />
+        <InfoItem icon={<MapPin className="w-5 h-5 text-status-green" />} title="Based in Bangladesh," sub="Barishal" />
         <InfoItem icon={<Globe className="w-5 h-5 text-foreground" />} title="Available all around" sub="Worldwide" />
-        <InfoItem icon={<BadgeCheck className="w-5 h-5 text-status-blue" />} title="Creative Agency" sub="+ Design Studio" />
+        <InfoItem icon={<BadgeCheck className="w-5 h-5 text-status-blue" />} title="Verified Artist" sub="+ Songwriter" />
       </motion.div>
     </section>
   );
